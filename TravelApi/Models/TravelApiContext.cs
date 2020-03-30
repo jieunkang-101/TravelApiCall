@@ -10,6 +10,7 @@ namespace TravelApi.Models
     }
 
     public DbSet<Destination> Destinations { get; set; }
+    public DbSet<Review> Reviews { get; set; }
 
   }
 }  
