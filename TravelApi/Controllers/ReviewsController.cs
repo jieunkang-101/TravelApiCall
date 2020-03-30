@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +39,7 @@ namespace TravelApi.Controllers
         query = query.Where(entry => entry.Landmark == landmark);
       }
 
-      return query.ToList();
+      return query.OrderByDescending(review => review.Rating).ToList();
 
     }
 
@@ -73,6 +74,16 @@ namespace TravelApi.Controllers
       var reviewToDelete = _db.Reviews.FirstOrDefault(entry => entry.ReviewId == id);
       _db.Reviews.Remove(reviewToDelete);
       _db.SaveChanges();
+    }
+
+    // GET Review of random destination => api/reviews/random
+    [HttpGet("random")]
+    public ActionResult<Review> Random ()
+    {
+      List<Review> reviews = _db.Reviews.ToList();
+      var rnd = new Random();
+      int rndIdx = rnd.Next(0,reviews.Count-1);
+      return reviews[rndIdx];
     }
   }
 }    
