@@ -11,8 +11,11 @@ namespace TravelApi.Models
     }
 
     public int DestinationId { get; set; }
+    [Required]
     public string Country { get; set; }
+    [Required]
     public string City { get; set; }
+    [Required]
     public string Landmark { get; set; }
     public ICollection<Review> Reviews { get; set; }
   }
