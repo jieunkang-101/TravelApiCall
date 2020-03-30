@@ -38,7 +38,7 @@ namespace TravelApi.Controllers
         query = query.Where(entry => entry.Landmark == landmark);
       }
 
-      return query.ToList();
+      return query.Include(destination => destination.Reviews).ToList();
     }
 
     // POST api/destinations
@@ -53,7 +53,8 @@ namespace TravelApi.Controllers
     [HttpGet("{id}")]
     public ActionResult<Destination> Get(int id)
     {
-      return _db.Destinations.FirstOrDefault(entry => entry.DestinationId == id);
+      var thisDestination = _db.Destinations.Include(destination => destination.Reviews).FirstOrDefault(entry => entry.DestinationId == id);
+      return thisDestination;
     }
 
     // PUT api/destinations/3
