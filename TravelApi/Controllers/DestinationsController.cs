@@ -38,7 +38,7 @@ namespace TravelApi.Controllers
         query = query.Where(entry => entry.Landmark == landmark);
       }
 
-      return query.Include(destination => destination.Reviews).ToList();
+      return query.Include(destination => destination.Reviews).OrderByDescending(desitnation => desitnation.Rating).ToList();
     }
 
     // POST api/destinations

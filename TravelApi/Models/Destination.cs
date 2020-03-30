@@ -17,6 +17,8 @@ namespace TravelApi.Models
     public string City { get; set; }
     [Required]
     public string Landmark { get; set; }
+    [Required]
+    public double Rating { get; set; }
     public ICollection<Review> Reviews { get; set; }
   }
 }  

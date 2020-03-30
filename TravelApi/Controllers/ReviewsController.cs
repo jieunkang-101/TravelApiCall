@@ -19,9 +19,27 @@ namespace TravelApi.Controllers
 
     // GET api/reviews
     [HttpGet]
-    public ActionResult<IEnumerable<Review>> Get()
+    public ActionResult<IEnumerable<Review>> Get(string country, string city, string landmark)
     {
-      return _db.Reviews.ToList();
+      var query = _db.Reviews.Include(review => review.Destination).AsQueryable();
+
+      if (country != null)
+      {
+        query = query.Where(entry => entry.Destination.Country == country);
+      }
+
+      if (city != null)
+      {
+        query = query.Where(entry => entry.Destination.City == city);
+      }
+
+      if (landmark != null)
+      {
+        query = query.Where(entry => entry.Destination.Landmark == landmark);
+      }
+
+      return query.ToList();
+
     }
 
     // POST api/reviews
@@ -36,7 +54,7 @@ namespace TravelApi.Controllers
     [HttpGet("{id}")]
     public ActionResult<Review> Get(int id)
     {
-      return _db.Reviews.FirstOrDefault(entry => entry.ReviewId == id);
+      return _db.Reviews.Include(review => review.Destination).FirstOrDefault(entry => entry.ReviewId == id);
     }
 
     // PUT api/reviews/3
