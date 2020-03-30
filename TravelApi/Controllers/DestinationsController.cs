@@ -19,9 +19,26 @@ namespace TravelApi.Controllers
 
     // GET api/destinations
     [HttpGet]
-    public ActionResult<IEnumerable<Destination>> Get()
+    public ActionResult<IEnumerable<Destination>> Get(string country, string city, string landmark)
     {
-      return _db.Destinations.ToList();
+      var query = _db.Destinations.AsQueryable();
+
+      if (country != null)
+      {
+        query = query.Where(entry => entry.Country == country);
+      }
+
+      if (city != null)
+      {
+        query = query.Where(entry => entry.City == city);
+      }
+
+      if (landmark != null)
+      {
+        query = query.Where(entry => entry.Landmark == landmark);
+      }
+
+      return query.ToList();
     }
 
     // POST api/destinations
