@@ -11,8 +11,8 @@ namespace TravelApi.Models
     [Required]
     public string Description { get; set; }
     [Required]
-    [Range(0, 5.00, ErrorMessage = "Rating must be between 0 and 5.")]
-    public double Rating { get; set; }
+    [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5.")]
+    public int Rating { get; set; }
     public int DestinationId { get; set; }
     public Destination Destination { get; set; }
   }
