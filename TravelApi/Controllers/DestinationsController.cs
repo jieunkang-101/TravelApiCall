@@ -56,7 +56,5 @@ namespace TravelApi.Controllers
       _db.Destinations.Remove(destinationToDelete);
       _db.SaveChanges();
     }
-
-
   }
 }    
