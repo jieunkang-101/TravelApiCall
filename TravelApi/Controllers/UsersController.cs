@@ -43,6 +43,7 @@ namespace TravelApi.Controllers
         return BadRequest(new { message = "Username or password is incorrect" });
       }
          
+      // authentication successful so generate jwt token   
       var tokenHandler = new JwtSecurityTokenHandler();
       var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
       var tokenDescriptor = new SecurityTokenDescriptor
