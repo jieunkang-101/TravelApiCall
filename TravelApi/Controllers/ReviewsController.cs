@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using TravelApi.Models;
+using TravelApi.Services;
 
 namespace TravelApi.Controllers
 {
@@ -43,14 +45,6 @@ namespace TravelApi.Controllers
 
     }
 
-    // POST api/reviews
-    [HttpPost]
-    public void Post([FromBody] Review review)
-    {
-      _db.Reviews.Add(review);
-      _db.SaveChanges();
-    }
-
     // GET api/reviews/3
     [HttpGet("{id}")]
     public ActionResult<Review> Get(int id)
@@ -58,7 +52,17 @@ namespace TravelApi.Controllers
       return _db.Reviews.FirstOrDefault(entry => entry.ReviewId == id);
     }
 
+    // POST api/reviews
+    [Authorize]
+    [HttpPost]
+    public void Post([FromBody] Review review)
+    {
+      _db.Reviews.Add(review);
+      _db.SaveChanges();
+    }
+
     // PUT api/reviews/3
+    [Authorize]
     [HttpPut("{id}")]
     public void Put(int id, [FromBody] Review review)
     {
@@ -68,6 +72,7 @@ namespace TravelApi.Controllers
     }
 
     // DELETE api/reviews/3
+    [Authorize]
     [HttpDelete("{id}")]
     public void Delete(int id)
     {

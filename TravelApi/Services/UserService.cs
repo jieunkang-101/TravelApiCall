@@ -61,6 +61,7 @@ namespace TravelApi.Services
       return user;
     }
 
+    // GET users
     public IEnumerable<User> GetAll()
     {
       // return users without passwords
