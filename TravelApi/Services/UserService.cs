@@ -31,15 +31,15 @@ namespace TravelApi.Services
     // };
 
     //private readonly AppSettings _appSettings;
-    private DataContext _context;
+    private TravelApiContext _context;
 
-    // public UserService(IOptions<AppSettings> appSettings, DataContext context)
+    // public UserService(IOptions<AppSettings> appSettings, TravelApiContext context)
     // {
     //   _appSettings = appSettings.Value;
     //   _context = context;
     // }
 
-    public UserService(DataContext context)
+    public UserService(TravelApiContext context)
     {
       _context = context;
     }

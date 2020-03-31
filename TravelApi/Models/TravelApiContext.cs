@@ -23,11 +23,11 @@ namespace TravelApi.Models
           new Review { ReviewId =5, Author = "user3", Country = "Korea", City = "Seoul", Landmark = "Gyeongbokgung Palace", Description = "It is one of the best places on South Korea to see the old architecture of a palace. Even traditional events are demonstrate times to time. The most interesting thing in this place is that you can take photographs with soldiers with traditional costumes.", Rating = 5 }
         );    
 
-      builder.Entity<User>()
-        .HasData(
-          new User { Id = 1, FirstName = "Admin", LastName = "User", Username = "admin", Password = "admin", Role = Role.Admin },
-          new User { Id = 2, FirstName = "Normal", LastName = "User", Username = "user", Password = "user", Role = Role.User } 
-        );    
+      // builder.Entity<User>()
+      //   .HasData(
+      //     new User { Id = 1, FirstName = "Admin", LastName = "User", Username = "admin", Password = "admin", Role = Role.Admin },
+      //     new User { Id = 2, FirstName = "Normal", LastName = "User", Username = "user", Password = "user", Role = Role.User } 
+      //   );    
     }
   }
 }  
