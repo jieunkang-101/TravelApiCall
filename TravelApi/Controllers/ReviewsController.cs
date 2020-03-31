@@ -82,7 +82,7 @@ namespace TravelApi.Controllers
     {
       List<Review> reviews = _db.Reviews.ToList();
       var rnd = new Random();
-      int rndIdx = rnd.Next(0,reviews.Count-1);
+      int rndIdx = rnd.Next(0, reviews.Count-1);
       return reviews[rndIdx];
     }
   }
