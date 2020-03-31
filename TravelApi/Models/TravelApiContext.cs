@@ -24,7 +24,8 @@ namespace TravelApi.Models
 
       builder.Entity<User>()
         .HasData(
-          new User { Id = 1, FirstName = "Test", LastName = "User", Username = "test", Password = "test" } 
+          new User { Id = 1, FirstName = "Admin", LastName = "User", Username = "admin", Password = "admin", Role = Role.Admin },
+          new User { Id = 2, FirstName = "Normal", LastName = "User", Username = "user", Password = "user", Role = Role.User } 
         );    
     }
   }
