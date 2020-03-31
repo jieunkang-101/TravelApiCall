@@ -38,8 +38,10 @@ namespace TravelApi.Services
 
       // return null if user not found
       if (user == null)
+      {
         return null;
-
+      }
+      
       // authentication successful so generate jwt token
       var tokenHandler = new JwtSecurityTokenHandler();
       var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
