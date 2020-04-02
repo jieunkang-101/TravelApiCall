@@ -26,6 +26,9 @@ namespace TravelApi
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      // Register the Swagger services
+      services.AddSwaggerDocument();  
+
       // configure API versioning
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 			services.AddApiVersioning(config =>
@@ -97,6 +100,10 @@ namespace TravelApi
           .AllowAnyHeader());
 
       app.UseAuthentication();
+
+      // Register the Swagger generator and the Swagger UI middlewares
+      app.UseOpenApi();
+      app.UseSwaggerUi3();
       
       app.UseMvc();
     }
