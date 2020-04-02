@@ -1,6 +1,7 @@
 ﻿using TravelApi.Helpers;
 using TravelApi.Models;
 using TravelApi.Services;
+using TravelApi.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,18 @@ namespace TravelApi
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      // configure API versioning
+      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+			services.AddApiVersioning(config =>
+			{
+				// default API version is 1.0
+				config.DefaultApiVersion = new ApiVersion(1, 0);
+				// to set the default version when the client has not specified any version
+				config.AssumeDefaultVersionWhenUnspecified = true;
+				// to add the API versions in the response header
+				config.ReportApiVersions = true;
+			});  
+
       services.AddCors();
       services.AddDbContext<TravelApiContext>(opt =>
           opt.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
@@ -34,7 +47,7 @@ namespace TravelApi
       var appSettingsSection = Configuration.GetSection("AppSettings");
       services.Configure<AppSettings>(appSettingsSection);
 
-      // configure jwt authentication
+      // configure JWT authentication
       var appSettings = appSettingsSection.Get<AppSettings>();
       var key = Encoding.ASCII.GetBytes(appSettings.Secret);
       services.AddAuthentication(x =>

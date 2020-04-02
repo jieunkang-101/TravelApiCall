@@ -11,6 +11,7 @@ namespace TravelApi.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
+  [ApiVersion("1.0")] //GET api/reviews?api-version=1.0
   public class ReviewsController : ControllerBase
   {
     private TravelApiContext _db;
@@ -21,6 +22,7 @@ namespace TravelApi.Controllers
     }
 
     // GET api/reviews
+    // GET api/reviews?country=korea
     [HttpGet]
     public ActionResult<IEnumerable<Review>> Get(string country, string city, string landmark)
     {
