@@ -31,11 +31,14 @@ namespace TravelApi
 			services.AddApiVersioning(config =>
 			{
 				// default API version is 1.0
-				config.DefaultApiVersion = new ApiVersion(1, 0);
+				config.DefaultApiVersion = new ApiVersion(2, 0);
 				// to set the default version when the client has not specified any version
 				config.AssumeDefaultVersionWhenUnspecified = true;
 				// to add the API versions in the response header
 				config.ReportApiVersions = true;
+        // instead of putting the ApiVersion attribure on all the controller
+        config.Conventions.Controller<ReviewsController>().HasApiVersion(new ApiVersion(2, 0));
+        config.Conventions.Controller<UsersController>().HasApiVersion(new ApiVersion(1, 0));
 			});  
 
       services.AddCors();
