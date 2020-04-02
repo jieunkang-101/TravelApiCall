@@ -5,7 +5,7 @@
 #### By **_Jieun Kang_**
 
 ## Description
-An MVC application to help Pierre track the vendors that purchase baked goods from Pierre's bakery and the orders belonging to those vendors.
+An API that allows users to GET and POST reviews about various travel destinations around the world. 
 
 ## Specifications : user sotries
 * As a user, I want to GET and POST reviews about travel destinations.
