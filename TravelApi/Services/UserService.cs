@@ -30,17 +30,12 @@ namespace TravelApi.Services
     //   new User { Id = 2, FirstName = "Normal", LastName = "User", Username = "user", Password = "user", Role = Role.User } 
     // };
 
-    //private readonly AppSettings _appSettings;
+    private readonly AppSettings _appSettings;
     private TravelApiContext _context;
 
-    // public UserService(IOptions<AppSettings> appSettings, TravelApiContext context)
-    // {
-    //   _appSettings = appSettings.Value;
-    //   _context = context;
-    // }
-
-    public UserService(TravelApiContext context)
+    public UserService(IOptions<AppSettings> appSettings, TravelApiContext context)
     {
+      _appSettings = appSettings.Value;
       _context = context;
     }
 
@@ -65,27 +60,27 @@ namespace TravelApi.Services
         return null;
       }
                 
-      // authentication successful so generate jwt token
-      // var tokenHandler = new JwtSecurityTokenHandler();
-      // var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-      // var tokenDescriptor = new SecurityTokenDescriptor
-      // {
-      //   Subject = new ClaimsIdentity(new Claim[] 
-      //   {
-      //     new Claim(ClaimTypes.Name, user.Id.ToString()),
-      //     new Claim(ClaimTypes.Role, user.Role)
-      //   }),
-      //   Expires = DateTime.UtcNow.AddDays(7),
-      //   SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-      // };
-      // var token = tokenHandler.CreateToken(tokenDescriptor);
-      // user.Token = tokenHandler.WriteToken(token);
+      //authentication successful so generate jwt token
+      var tokenHandler = new JwtSecurityTokenHandler();
+      var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+      var tokenDescriptor = new SecurityTokenDescriptor
+      {
+        Subject = new ClaimsIdentity(new Claim[] 
+        {
+          new Claim(ClaimTypes.Name, user.Id.ToString()),
+          new Claim(ClaimTypes.Role, user.Role)
+        }),
+        Expires = DateTime.UtcNow.AddDays(7),
+        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+      };
+      var token = tokenHandler.CreateToken(tokenDescriptor);
+      user.Token = tokenHandler.WriteToken(token);
 
-      // remove password before returning
-      // user.PasswordHash = null;
-      // user.PasswordSalt = null;
+      //remove password before returning
+      user.PasswordHash = null;
+      user.PasswordSalt = null;
 
-      // authentication successful
+      //authentication successful
       return user;
     }
 
