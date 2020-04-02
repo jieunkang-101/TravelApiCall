@@ -59,6 +59,7 @@ namespace TravelApi.Controllers
     [HttpPost]
     public void Post([FromBody] Review review)
     {
+      review.Date = DateTime.Now;
       _db.Reviews.Add(review);
       _db.SaveChanges();
     }
